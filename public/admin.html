@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - WebApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #fff; }
+        .glass-effect { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        textarea { min-height: 100px; }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-4xl font-bold">
+                <i class="fas fa-cog mr-3"></i>관리자 페이지
+            </h1>
+            <button onclick="showNewProjectForm()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg">
+                <i class="fas fa-plus mr-2"></i>새 프로젝트 생성
+            </button>
+        </div>
+
+        <!-- Form Section -->
+        <div id="form-section" class="glass-effect p-8 rounded-xl mb-8 hidden">
+            <h2 id="form-title" class="text-2xl font-bold mb-6">새 프로젝트 생성</h2>
+            <form id="project-form" class="space-y-6">
+                <!-- Korean -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">🇰🇷 한국어</h3>
+                    <input type="text" id="title-ko" placeholder="프로젝트 제목 (필수)" required 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <textarea id="desc-ko" placeholder="프로젝트 설명 (필수)" required 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3"></textarea>
+                    <textarea id="dev-scope-ko" placeholder="개발 범위" 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded"></textarea>
+                </div>
+
+                <!-- English -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">🇺🇸 English</h3>
+                    <input type="text" id="title-en" placeholder="Project Title" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <textarea id="desc-en" placeholder="Project Description" 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3"></textarea>
+                    <textarea id="dev-scope-en" placeholder="Development Scope" 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded"></textarea>
+                </div>
+
+                <!-- Chinese -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">🇨🇳 中文</h3>
+                    <input type="text" id="title-zh" placeholder="项目标题" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <textarea id="desc-zh" placeholder="项目描述" 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3"></textarea>
+                    <textarea id="dev-scope-zh" placeholder="开发范围" 
+                              class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded"></textarea>
+                </div>
+
+                <!-- Images -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">📷 이미지 업로드</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block mb-2">대표 이미지</label>
+                            <input type="file" id="thumbnail-upload" accept="image/*" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block mb-2">상세 이미지 1</label>
+                            <input type="file" id="detail1-upload" accept="image/*" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block mb-2">상세 이미지 2</label>
+                            <input type="file" id="detail2-upload" accept="image/*" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block mb-2">상세 이미지 3</label>
+                            <input type="file" id="detail3-upload" accept="image/*" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block mb-2">상세 이미지 4</label>
+                            <input type="file" id="detail4-upload" accept="image/*" class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">🎥 YouTube 영상</h3>
+                    <input type="url" id="youtube-1" placeholder="YouTube URL 1" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <input type="url" id="youtube-2" placeholder="YouTube URL 2" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <input type="url" id="youtube-3" placeholder="YouTube URL 3" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded">
+                </div>
+
+                <!-- Tech Stack & Settings -->
+                <div class="glass-effect p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">⚙️ 설정</h3>
+                    <input type="text" id="tech-stack" placeholder="기술 스택 (쉼표로 구분)" 
+                           class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-3">
+                    <div class="flex items-center space-x-6 mb-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="is-published" class="mr-2">
+                            <span>공개</span>
+                        </label>
+                        <label class="flex items-center">
+                            <span class="mr-2">정렬 순서:</span>
+                            <input type="number" id="display-order" value="0" 
+                                   class="w-24 px-3 py-1 bg-gray-800 border border-gray-700 rounded">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex space-x-4">
+                    <button type="submit" class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg">
+                        <i class="fas fa-save mr-2"></i>저장
+                    </button>
+                    <button type="button" onclick="cancelEdit()" class="px-8 py-3 bg-gray-600 hover:bg-gray-700 rounded-lg">
+                        <i class="fas fa-times mr-2"></i>취소
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Projects List -->
+        <div class="glass-effect p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">프로젝트 목록</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="px-4 py-3 text-left">ID</th>
+                            <th class="px-4 py-3 text-left">제목</th>
+                            <th class="px-4 py-3 text-left">기술스택</th>
+                            <th class="px-4 py-3 text-left">상태</th>
+                            <th class="px-4 py-3 text-left">순서</th>
+                            <th class="px-4 py-3 text-left">액션</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <script src="/static/admin.js"></script>
+</body>
+</html>

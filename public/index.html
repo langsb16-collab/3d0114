@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebApp - Software Development Company</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .spline-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.6;
+        }
+        
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .lang-btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .lang-btn.active {
+            background: rgba(59, 130, 246, 0.4);
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass-effect z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-code text-3xl text-blue-500"></i>
+                    <span class="text-2xl font-bold gradient-text">WebApp</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="/about" class="nav-link" data-i18n="nav.about">About Us</a>
+                    <a href="/portfolio" class="nav-link" data-i18n="nav.portfolio">Portfolio</a>
+                    <a href="/services" class="nav-link" data-i18n="nav.services">Services</a>
+                    <a href="/technology" class="nav-link" data-i18n="nav.technology">Technology</a>
+                    <a href="/contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="lang-btn px-3 py-1 rounded glass-effect" data-lang="ko">🇰🇷</button>
+                    <button class="lang-btn px-3 py-1 rounded glass-effect" data-lang="en">🇺🇸</button>
+                    <button class="lang-btn px-3 py-1 rounded glass-effect" data-lang="zh">🇨🇳</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="spline-container">
+            <iframe src='https://my.spline.design/nexbotrobotcharacterconcept-Y5myBH0hVKYu2zLH5zpAg1XR/' 
+                    frameborder='0' 
+                    width='100%' 
+                    height='100%'
+                    style="pointer-events: none;">
+            </iframe>
+        </div>
+        
+        <div class="content-overlay text-center px-6">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6" data-i18n="hero.title">
+                Innovative Software<br/>Solutions
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12" data-i18n="hero.subtitle">
+                Transform your ideas into reality with cutting-edge technology
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/portfolio" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition">
+                    <i class="fas fa-folder-open mr-2"></i>
+                    <span data-i18n="hero.viewPortfolio">View Portfolio</span>
+                </a>
+                <a href="/contact" class="px-8 py-4 glass-effect hover:bg-white/10 rounded-lg font-semibold transition">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <span data-i18n="hero.contactUs">Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-i18n="features.title">
+                Why Choose Us
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-effect p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-rocket text-blue-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="features.fast.title">Fast Development</h3>
+                    <p class="text-gray-300" data-i18n="features.fast.desc">
+                        Rapid prototyping and agile development methodology for quick time-to-market
+                    </p>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-shield-alt text-purple-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="features.secure.title">Secure & Reliable</h3>
+                    <p class="text-gray-300" data-i18n="features.secure.desc">
+                        Enterprise-grade security and 99.9% uptime guarantee for your applications
+                    </p>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-users text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="features.support.title">24/7 Support</h3>
+                    <p class="text-gray-300" data-i18n="features.support.desc">
+                        Round-the-clock technical support and maintenance for your peace of mind
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-6 glass-effect mt-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <i class="fas fa-code text-2xl text-blue-500"></i>
+                <span class="text-xl font-bold gradient-text">WebApp</span>
+            </div>
+            <p class="text-gray-400 mb-6" data-i18n="footer.copyright">
+                © 2026 WebApp. All rights reserved.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition">
+                    <i class="fab fa-twitter text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/static/i18n.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
