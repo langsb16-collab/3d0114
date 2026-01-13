@@ -85,6 +85,22 @@
             background: rgba(59, 130, 246, 0.4);
             border-color: #3b82f6;
         }
+        
+        /* Hide Spline watermark */
+        .spline-container iframe {
+            pointer-events: none;
+        }
+        
+        .spline-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 50px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
