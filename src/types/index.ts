@@ -22,15 +22,21 @@ export interface Project {
   
   // Images
   thumbnail_image: string | null;
-  detail_image_1: string | null;
-  detail_image_2: string | null;
-  detail_image_3: string | null;
-  detail_image_4: string | null;
+  detail_images: string | null; // JSON array
+  
+  // Backward compatibility (optional)
+  detail_image_1?: string | null;
+  detail_image_2?: string | null;
+  detail_image_3?: string | null;
+  detail_image_4?: string | null;
   
   // YouTube videos
-  youtube_url_1: string | null;
-  youtube_url_2: string | null;
-  youtube_url_3: string | null;
+  youtube_urls: string | null; // JSON array
+  
+  // Backward compatibility (optional)
+  youtube_url_1?: string | null;
+  youtube_url_2?: string | null;
+  youtube_url_3?: string | null;
   
   // Technology stack
   tech_stack: string | null;

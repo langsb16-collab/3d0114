@@ -10,18 +10,20 @@ export function localizeProject(project: Project, lang: Language): LocalizedProj
     return ko; // Fallback to Korean
   };
 
-  const detail_images = [
-    project.detail_image_1,
-    project.detail_image_2,
-    project.detail_image_3,
-    project.detail_image_4,
-  ].filter((img): img is string => img !== null);
+  // Parse JSON fields
+  const detail_images = project.detail_images
+    ? (typeof project.detail_images === 'string'
+        ? JSON.parse(project.detail_images)
+        : project.detail_images
+      ).filter((img: string) => img && img.trim() !== '')
+    : [];
 
-  const youtube_urls = [
-    project.youtube_url_1,
-    project.youtube_url_2,
-    project.youtube_url_3,
-  ].filter((url): url is string => url !== null);
+  const youtube_urls = project.youtube_urls
+    ? (typeof project.youtube_urls === 'string'
+        ? JSON.parse(project.youtube_urls)
+        : project.youtube_urls
+      ).filter((url: string) => url && url.trim() !== '')
+    : [];
 
   const tech_stack = project.tech_stack
     ? project.tech_stack.split(',').map(tech => tech.trim())
