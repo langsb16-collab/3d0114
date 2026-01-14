@@ -1,24 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "webapp",
+  "name": "tourit-run",
   "compatibility_date": "2026-01-13",
   "pages_build_output_dir": "./dist",
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  // D1 Database - local mode will create SQLite automatically
+  // D1 Database - using existing webapp-production database
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "webapp-production",
-      "database_id": "00000000-0000-0000-0000-000000000000"
-    }
-  ],
-  // R2 Storage for images
-  "r2_buckets": [
-    {
-      "binding": "PORTFOLIO_IMAGES",
-      "bucket_name": "webapp-portfolio-images"
+      "database_id": "785b47fb-de85-4a9f-a6a3-faa674d676e8"
     }
   ]
 }
