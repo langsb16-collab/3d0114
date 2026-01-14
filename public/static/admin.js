@@ -1,11 +1,8 @@
-// Admin page functionality
+// Admin page functionality - Simplified version
 let currentEditingId = null;
 let uploadedImages = {
-  thumbnail: null,
-  detail1: null,
-  detail2: null,
-  detail3: null,
-  detail4: null
+  image1: null,
+  image2: null
 };
 
 async function loadAllProjects() {
@@ -18,7 +15,6 @@ async function loadAllProjects() {
       <tr class="border-b border-gray-700">
         <td class="px-4 py-3">${project.id}</td>
         <td class="px-4 py-3">${project.title_ko}</td>
-        <td class="px-4 py-3">${project.tech_stack || '-'}</td>
         <td class="px-4 py-3">
           <span class="px-2 py-1 rounded ${project.is_published ? 'bg-green-600' : 'bg-red-600'}">
             ${project.is_published ? '공개' : '비공개'}
@@ -57,13 +53,6 @@ async function editProject(id) {
     document.getElementById('title-ko').value = project.title_ko || '';
     document.getElementById('title-en').value = project.title_en || '';
     document.getElementById('title-zh').value = project.title_zh || '';
-    document.getElementById('desc-ko').value = project.description_ko || '';
-    document.getElementById('desc-en').value = project.description_en || '';
-    document.getElementById('desc-zh').value = project.description_zh || '';
-    document.getElementById('tech-stack').value = project.tech_stack || '';
-    document.getElementById('dev-scope-ko').value = project.dev_scope_ko || '';
-    document.getElementById('dev-scope-en').value = project.dev_scope_en || '';
-    document.getElementById('dev-scope-zh').value = project.dev_scope_zh || '';
     document.getElementById('youtube-1').value = project.youtube_url_1 || '';
     document.getElementById('youtube-2').value = project.youtube_url_2 || '';
     document.getElementById('youtube-3').value = project.youtube_url_3 || '';
@@ -71,11 +60,8 @@ async function editProject(id) {
     document.getElementById('display-order').value = project.display_order || 0;
     
     // Store existing image URLs
-    uploadedImages.thumbnail = project.thumbnail_image;
-    uploadedImages.detail1 = project.detail_image_1;
-    uploadedImages.detail2 = project.detail_image_2;
-    uploadedImages.detail3 = project.detail_image_3;
-    uploadedImages.detail4 = project.detail_image_4;
+    uploadedImages.image1 = project.detail_image_1;
+    uploadedImages.image2 = project.detail_image_2;
     
     // Show form
     document.getElementById('form-section').classList.remove('hidden');
@@ -123,18 +109,11 @@ async function saveProject(event) {
     title_ko: document.getElementById('title-ko').value,
     title_en: document.getElementById('title-en').value,
     title_zh: document.getElementById('title-zh').value,
-    description_ko: document.getElementById('desc-ko').value,
-    description_en: document.getElementById('desc-en').value,
-    description_zh: document.getElementById('desc-zh').value,
-    tech_stack: document.getElementById('tech-stack').value,
-    dev_scope_ko: document.getElementById('dev-scope-ko').value,
-    dev_scope_en: document.getElementById('dev-scope-en').value,
-    dev_scope_zh: document.getElementById('dev-scope-zh').value,
-    thumbnail_image: uploadedImages.thumbnail,
-    detail_image_1: uploadedImages.detail1,
-    detail_image_2: uploadedImages.detail2,
-    detail_image_3: uploadedImages.detail3,
-    detail_image_4: uploadedImages.detail4,
+    description_ko: document.getElementById('title-ko').value, // Use title as description
+    description_en: document.getElementById('title-en').value,
+    description_zh: document.getElementById('title-zh').value,
+    detail_image_1: uploadedImages.image1,
+    detail_image_2: uploadedImages.image2,
     youtube_url_1: document.getElementById('youtube-1').value,
     youtube_url_2: document.getElementById('youtube-2').value,
     youtube_url_3: document.getElementById('youtube-3').value,
@@ -162,11 +141,8 @@ async function saveProject(event) {
 function cancelEdit() {
   currentEditingId = null;
   uploadedImages = {
-    thumbnail: null,
-    detail1: null,
-    detail2: null,
-    detail3: null,
-    detail4: null
+    image1: null,
+    image2: null
   };
   document.getElementById('project-form').reset();
   document.getElementById('form-section').classList.add('hidden');
@@ -183,8 +159,8 @@ function showNewProjectForm() {
 document.addEventListener('DOMContentLoaded', function() {
   loadAllProjects();
   
-  // Image upload handlers
-  const imageInputs = ['thumbnail', 'detail1', 'detail2', 'detail3', 'detail4'];
+  // Image upload handlers (2장만)
+  const imageInputs = ['image1', 'image2'];
   imageInputs.forEach(type => {
     const input = document.getElementById(`${type}-upload`);
     if (input) {

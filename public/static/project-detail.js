@@ -37,35 +37,12 @@ async function loadProjectDetail() {
     }).filter(url => url !== null);
     
     content.innerHTML = `
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">${project.title}</h1>
-      
-      <div class="glass-effect p-8 rounded-xl mb-8">
-        <h2 class="text-2xl font-bold mb-4" data-i18n="project.description">Project Description</h2>
-        <p class="text-gray-300 leading-relaxed whitespace-pre-line">${project.description}</p>
-      </div>
-      
-      ${project.tech_stack.length > 0 ? `
-        <div class="glass-effect p-8 rounded-xl mb-8">
-          <h2 class="text-2xl font-bold mb-4" data-i18n="project.techStack">Technology Stack</h2>
-          <div>
-            ${project.tech_stack.map(tech => `
-              <span class="tech-tag">${tech}</span>
-            `).join('')}
-          </div>
-        </div>
-      ` : ''}
-      
-      ${project.dev_scope ? `
-        <div class="glass-effect p-8 rounded-xl mb-8">
-          <h2 class="text-2xl font-bold mb-4" data-i18n="project.devScope">Development Scope</h2>
-          <p class="text-gray-300 leading-relaxed whitespace-pre-line">${project.dev_scope}</p>
-        </div>
-      ` : ''}
+      <h1 class="text-4xl md:text-5xl font-bold mb-8">${project.title}</h1>
       
       ${project.detail_images.length > 0 ? `
         <div class="glass-effect p-8 rounded-xl mb-8">
-          <h2 class="text-2xl font-bold mb-4" data-i18n="project.gallery">Image Gallery</h2>
-          <div class="image-gallery">
+          <h2 class="text-2xl font-bold mb-4">📷 프로젝트 이미지</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             ${project.detail_images.map(img => `
               <div class="rounded-lg overflow-hidden">
                 <img src="${img}" 
@@ -80,7 +57,7 @@ async function loadProjectDetail() {
       
       ${youtubeEmbeds.length > 0 ? `
         <div class="glass-effect p-8 rounded-xl mb-8">
-          <h2 class="text-2xl font-bold mb-4" data-i18n="project.videos">Project Videos</h2>
+          <h2 class="text-2xl font-bold mb-4">🎥 프로젝트 영상</h2>
           <div class="space-y-6">
             ${youtubeEmbeds.map(embedUrl => `
               <div class="youtube-embed">
