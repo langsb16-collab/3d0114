@@ -45,7 +45,7 @@ async function loadPortfolio() {
               </div>
             ` : ''}
             
-            <a href="/project-detail.html?id=${project.id}" 
+            <a href="/project-detail?id=${project.id}" 
                class="inline-flex items-center text-blue-400 hover:text-blue-300 transition">
               <span data-i18n="portfolio.viewDetails">View Details</span>
               <i class="fas fa-arrow-right ml-2"></i>
