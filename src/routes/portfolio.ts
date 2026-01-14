@@ -125,8 +125,7 @@ portfolio.put('/:id', async (c) => {
     const fields = [
       'title_ko', 'title_en', 'title_zh',
       'description_ko', 'description_en', 'description_zh',
-      'thumbnail_image', 'detail_image_1', 'detail_image_2', 'detail_image_3', 'detail_image_4',
-      'youtube_url_1', 'youtube_url_2', 'youtube_url_3',
+      'thumbnail_image', 'detail_images', 'youtube_urls',
       'tech_stack', 'dev_scope_ko', 'dev_scope_en', 'dev_scope_zh',
       'is_published', 'display_order'
     ];

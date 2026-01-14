@@ -53,15 +53,27 @@ async function editProject(id) {
     document.getElementById('title-ko').value = project.title_ko || '';
     document.getElementById('title-en').value = project.title_en || '';
     document.getElementById('title-zh').value = project.title_zh || '';
-    document.getElementById('youtube-1').value = project.youtube_url_1 || '';
-    document.getElementById('youtube-2').value = project.youtube_url_2 || '';
-    document.getElementById('youtube-3').value = project.youtube_url_3 || '';
+    
+    // Parse JSON arrays or use individual columns as fallback
+    const youtube_urls = project.youtube_urls 
+      ? (typeof project.youtube_urls === 'string' ? JSON.parse(project.youtube_urls) : project.youtube_urls)
+      : [project.youtube_url_1, project.youtube_url_2, project.youtube_url_3];
+    
+    document.getElementById('youtube-1').value = youtube_urls[0] || '';
+    document.getElementById('youtube-2').value = youtube_urls[1] || '';
+    document.getElementById('youtube-3').value = youtube_urls[2] || '';
+    
     document.getElementById('is-published').checked = Boolean(project.is_published);
     document.getElementById('display-order').value = project.display_order || 0;
     
+    // Parse JSON arrays or use individual columns as fallback
+    const detail_images = project.detail_images
+      ? (typeof project.detail_images === 'string' ? JSON.parse(project.detail_images) : project.detail_images)
+      : [project.detail_image_1, project.detail_image_2];
+    
     // Store existing image URLs
-    uploadedImages.image1 = project.detail_image_1;
-    uploadedImages.image2 = project.detail_image_2;
+    uploadedImages.image1 = detail_images[0] || null;
+    uploadedImages.image2 = detail_images[1] || null;
     
     // Show form
     document.getElementById('form-section').classList.remove('hidden');
@@ -105,6 +117,16 @@ async function uploadImage(file, type) {
 async function saveProject(event) {
   event.preventDefault();
   
+  // Collect images as JSON array
+  const detail_images = [uploadedImages.image1, uploadedImages.image2].filter(img => img);
+  
+  // Collect YouTube URLs as JSON array
+  const youtube_urls = [
+    document.getElementById('youtube-1').value,
+    document.getElementById('youtube-2').value,
+    document.getElementById('youtube-3').value
+  ].filter(url => url && url.trim() !== '');
+  
   const projectData = {
     title_ko: document.getElementById('title-ko').value,
     title_en: document.getElementById('title-en').value,
@@ -112,11 +134,8 @@ async function saveProject(event) {
     description_ko: document.getElementById('title-ko').value, // Use title as description
     description_en: document.getElementById('title-en').value,
     description_zh: document.getElementById('title-zh').value,
-    detail_image_1: uploadedImages.image1,
-    detail_image_2: uploadedImages.image2,
-    youtube_url_1: document.getElementById('youtube-1').value,
-    youtube_url_2: document.getElementById('youtube-2').value,
-    youtube_url_3: document.getElementById('youtube-3').value,
+    detail_images: JSON.stringify(detail_images),
+    youtube_urls: JSON.stringify(youtube_urls),
     is_published: document.getElementById('is-published').checked,
     display_order: parseInt(document.getElementById('display-order').value) || 0
   };
